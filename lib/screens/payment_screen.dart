@@ -6,7 +6,10 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Payment")),
+      appBar: AppBar(
+        title: const Text("Payment"),
+        backgroundColor: Colors.blueAccent, // AppBar color
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -36,22 +39,34 @@ class PaymentScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    _buildPaymentMethod(),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Total Amount: \$100", // Example total amount
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/order');
+                        // Handle payment processing
+                        Navigator.pushNamed(context, '/order'); // Navigate to order confirmation
                       },
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green, // Button color
                         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text("View Orders"),
+                      child: const Text("Confirm Payment"),
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/cart');
+                        Navigator.pushNamed(context, '/cart'); // Navigate to cart
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -68,6 +83,40 @@ class PaymentScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  // Method to build payment method selection
+  Widget _buildPaymentMethod() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          "Select Payment Method",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 10),
+        ListTile(
+          title: const Text("Credit Card"),
+          leading: Radio(
+            value: 1,
+            groupValue: 1, // Replace with your state management variable
+            onChanged: (value) {},
+          ),
+        ),
+        ListTile(
+          title: const Text("PayPal"),
+          leading: Radio(
+            value: 2,
+            groupValue: 1, // Replace with your state management variable
+            onChanged: (value) {},
+          ),
+        ),
+        // Add more payment methods as needed
+      ],
     );
   }
 }

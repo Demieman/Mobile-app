@@ -6,57 +6,111 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
-      body: Padding(
+      appBar: AppBar(
+        title: const Text("Register"),
+        backgroundColor: Colors.blueAccent, // AppBar color
+      ),
+      body: Container(
+        color: Colors.lightBlue[50], // Background color of the body
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
               controller: fullNameController,
-              decoration: InputDecoration(labelText: "Full Name"),
+              decoration: InputDecoration(
+                labelText: "Full Name",
+                labelStyle: const TextStyle(color: Colors.blueGrey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(color: Colors.blueGrey),
+                ),
+              ),
             ),
+            const SizedBox(height: 10),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: InputDecoration(
+                labelText: "Email",
+                labelStyle: const TextStyle(color: Colors.blueGrey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(color: Colors.blueGrey),
+                ),
+              ),
               keyboardType: TextInputType.emailAddress,
             ),
+            const SizedBox(height: 10),
             TextField(
               controller: passwordController,
-              decoration: InputDecoration(labelText: "Password"),
+              decoration: InputDecoration(
+                labelText: "Password",
+                labelStyle: const TextStyle(color: Colors.blueGrey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(color: Colors.blueGrey),
+                ),
+              ),
               obscureText: true,
             ),
+            const SizedBox(height: 10),
             TextField(
               controller: confirmPasswordController,
-              decoration: InputDecoration(labelText: "Confirm Password"),
+              decoration: InputDecoration(
+                labelText: "Confirm Password",
+                labelStyle: const TextStyle(color: Colors.blueGrey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(color: Colors.blueGrey),
+                ),
+              ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Handle registration logic
-                // For example, validate inputs and show a message
                 if (passwordController.text == confirmPasswordController.text) {
                   // Navigate to login screen upon successful registration
                   Navigator.pushNamed(context, '/login');
                 } else {
                   // Show an error message
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Passwords do not match.")),
+                    const SnackBar(content: Text("Passwords do not match.")),
                   );
                 }
               },
-              child: Text("Register"),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white, backgroundColor: Colors.green, // Text color on button
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              child: const Text("Register"),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
               },
-              child: Text("Already have an account? Login"),
+              child: const Text(
+                "Already have an account? Login",
+                style: TextStyle(color: Colors.blueAccent),
+              ),
             ),
           ],
         ),

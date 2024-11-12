@@ -1,26 +1,86 @@
 import 'package:flutter/material.dart';
 
 class OrderScreen extends StatelessWidget {
+  const OrderScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Orders")),
-      body: Center(
+      appBar: AppBar(
+        title: const Text("Your Orders"),
+        backgroundColor: Colors.blueAccent, // AppBar color
+      ),
+      body: Container(
+        color: Colors.lightBlue[50], // Background color of the body
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Your Orders"),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/payment');
-              },
-              child: Text("Proceed to Payment"),
+            Text(
+              "Order Summary",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey[800], // Header text color
+              ),
             ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5, // Example item count
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    elevation: 3,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Product Name $index", style: const TextStyle(fontSize: 18)),
+                              const SizedBox(height: 5),
+                              const Text("Quantity: 1", style: TextStyle(color: Colors.grey)),
+                            ],
+                          ),
+                          Text("\$${(index + 1) * 20}", style: const TextStyle(fontSize: 18)),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const Divider(height: 40, thickness: 2),
+            const Text(
+              "Total:ETB \$${(5 * 20)}", // Total amount calculation
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cart');
+                Navigator.pushNamed(context, '/payment'); // Navigate to payment page
               },
-              child: Text("Go to Cart"),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white, backgroundColor: Colors.green, // Text color on button
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              child: const Text("Proceed to Payment"),
+            ),
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart'); // Navigate to cart page
+              },
+              child: const Text(
+                "Go to Cart",
+                style: TextStyle(color: Colors.blueAccent), // Text color for link
+              ),
             ),
           ],
         ),
